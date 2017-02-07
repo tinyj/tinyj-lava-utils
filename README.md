@@ -1,8 +1,9 @@
 
-# TinyJ Lava-Rex
-[![build status](https://travis-ci.org/tinyj/tinyj-lava-rex.svg?branch=master)](https://travis-ci.org/tinyj/tinyj-lava-rex)
+# TinyJ Lava-Utils
+[![build status](https://travis-ci.org/tinyj/tinyj-lava-utils.svg?branch=master)](https://travis-ci.org/tinyj/tinyj-lava-utils)
 
-A bunch 
+A bunch of static methods and classes simplifying functional programming
+in Java.
 
 ## API documentation
 
