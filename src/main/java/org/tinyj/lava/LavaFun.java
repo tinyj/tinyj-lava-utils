@@ -1,9 +1,6 @@
 package org.tinyj.lava;
 
-import org.tinyj.lava.binder.LavaBiConsumerBinder;
-import org.tinyj.lava.binder.LavaBiFunctionBinder;
-import org.tinyj.lava.binder.LavaConsumerBinder;
-import org.tinyj.lava.binder.LavaFunctionBinder;
+import org.tinyj.lava.binder.*;
 import org.tinyj.lava.fun.*;
 
 import java.util.function.*;
@@ -218,17 +215,41 @@ public class LavaFun {
   public static <X, E extends Exception> LavaBiPredicate<X, X, E>
   relation(LavaBiPredicate<? super X, ? super X, ? extends E> relation) { return LavaBiPredicate.castDown(relation); }
 
+  /**
+   * Start currying `bound`. See (#LavaConsumerBinder).
+   */
   public static <X, E extends Exception> LavaConsumerBinder<X, E>
   bind(LavaConsumer<? super X, ? extends E> bound) { return new LavaConsumerBinder<>(bound); }
 
+  /**
+   * Start currying `bound`. See (#LavaBiConsumerBinder).
+   */
   public static <X, Y, E extends Exception> LavaBiConsumerBinder<X, Y, E>
   bind(LavaBiConsumer<? super X, ? super Y, ? extends E> bound) { return new LavaBiConsumerBinder<>(bound); }
 
+  /**
+   * Start currying `bound`. See (#LavaFunctionBinder).
+   */
   public static <X, R, E extends Exception> LavaFunctionBinder<X, R, E>
   bind(LavaFunction<? super X, ? extends R, ? extends E> bound) { return new LavaFunctionBinder<>(bound); }
 
+  /**
+   * Start currying `bound`. See (#LavaBiFunctionBinder).
+   */
   public static <X, Y, R, E extends Exception> LavaBiFunctionBinder<X, Y, R, E>
   bind(LavaBiFunction<? super X, ? super Y, ? extends R, ? extends E> bound) { return new LavaBiFunctionBinder<>(bound); }
+
+  /**
+   * Start currying `bound`. See (#LavaPredicateBinder).
+   */
+  public static <X, E extends Exception> LavaPredicate<X, E>
+  bind(LavaPredicate<? super X, ? extends E> bound) { return new LavaPredicateBinder<>(bound); }
+
+  /**
+   * Start currying `bound`. See (#LavaBiPredicateBinder).
+   */
+  public static <X, Y, E extends Exception> LavaBiPredicate<X, Y, E>
+  bind(LavaBiPredicate<? super X, ? super Y, ? extends E> bound) { return new LavaBiPredicateBinder<>(bound); }
 
   /**
    * Extend a given (#LavaRunnable) to a (#LavaConsumer) ignoring its argument.

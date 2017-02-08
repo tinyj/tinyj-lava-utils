@@ -215,21 +215,39 @@ public class JavaFun {
   public static <X> BiPredicate<X, X>
   relation(BiPredicate<? super X, ? super X> relation) { return castDown(relation); }
 
+  /**
+   * Start currying `bound`. See (#JavaConsumerBinder).
+   */
   public static <X> JavaConsumerBinder<X>
   bind(Consumer<? super X> bound) { return new JavaConsumerBinder<>(bound); }
 
+  /**
+   * Start currying `bound`. See (#JavaBiConsumerBinder).
+   */
   public static <X, Y> JavaBiConsumerBinder<X, Y>
   bind(BiConsumer<? super X, ? super Y> bound) { return new JavaBiConsumerBinder<>(bound); }
 
+  /**
+   * Start currying `bound`. See (#JavaFunctionBinder).
+   */
   public static <X, R> JavaFunctionBinder<X, R>
   bind(Function<? super X, ? extends R> bound) { return new JavaFunctionBinder<>(bound); }
 
+  /**
+   * Start currying `bound`. See (#JavaBiFunctionBinder).
+   */
   public static <X, Y, R> JavaBiFunctionBinder<X, Y, R>
   bind(BiFunction<? super X, ? super Y, ? extends R> bound) { return new JavaBiFunctionBinder<>(bound); }
 
+  /**
+   * Start currying `bound`. See (#JavaPredicateBinder).
+   */
   public static <X> JavaPredicateBinder<X>
   bind(Predicate<? super X> bound) { return new JavaPredicateBinder<>(bound); }
 
+  /**
+   * Start currying `bound`. See (#JavaBiPredicateBinder).
+   */
   public static <X, Y> JavaBiPredicateBinder<X, Y>
   bind(BiPredicate<? super X, ? super Y> bound) { return new JavaBiPredicateBinder<>(bound); }
 
