@@ -1,6 +1,6 @@
 package org.tinyj.lava.binder;
 
-import org.tinyj.lava.JavaFun;
+import org.tinyj.lava.utils.JavaFun;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -9,12 +9,12 @@ import java.util.function.Supplier;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Enable various forms of currying on Java's (#Function).
- *
+ * Enable various forms of currying on Java's {@link Function}.
+ * <p>
  * To enable a fluent syntax binders wrapping the curried function are returned
  * where applicable. This introduces some overhead that might be an issue if
  * either the result is invoked many times or many results are produced. Use
- * `bound()` unwrap these results.
+ * {@code bound()} to unwrap results.
  *
  * @param <X> the type of the input to the function
  * @param <R> the type of the result of the function
@@ -30,15 +30,15 @@ public class JavaFunctionBinder<X, R>
   }
 
   /**
-   * Curry argument with `x`.
+   * Curry argument with {@code x}.
    */
   public Supplier<R>
   bind(X x) { return () -> bound.apply(x); }
 
   /**
-   * Link the argument to supplied value. `x` is invoked each time the
-   * resulting (#Supplier) is invoked and the results is supplied as argument
-   * to the curried (#Function).
+   * Link the argument to supplied value. {@code x} is invoked each time the
+   * resulting {@link Supplier} is invoked and the results is supplied as argument
+   * to the curried {@link Function}.
    */
   public Supplier<R>
   linkTo(Supplier<? extends X> x) {
@@ -47,8 +47,8 @@ public class JavaFunctionBinder<X, R>
   }
 
   /**
-   * Map the argument. `x` is invoked each time the resulting (#Function) is
-   * invoked and the result is supplied as argument to the curried (#Function).
+   * Map the argument. {@code x} is invoked each time the resulting {@link Function} is
+   * invoked and the result is supplied as argument to the curried {@link Function}.
    */
   public <U> JavaFunctionBinder<U, R>
   linkTo(Function<? super U, ? extends X> x) {
@@ -57,8 +57,8 @@ public class JavaFunctionBinder<X, R>
   }
 
   /**
-   * Map the argument. `x` is invoked each time the resulting (#BiFunction) is
-   * invoked and the result is supplied as argument to the curried (#Function).
+   * Map the argument. {@code x} is invoked each time the resulting {@link BiFunction} is
+   * invoked and the result is supplied as argument to the curried {@link Function}.
    */
   public <U, V> JavaBiFunctionBinder<U, V, R>
   linkTo(BiFunction<? super U, ? super V, ? extends X> x) {
@@ -67,10 +67,16 @@ public class JavaFunctionBinder<X, R>
   }
 
   /**
-   * @return the wrapped (#Function)
+   * @return the wrapped {@link Function}
    */
   public Function<X, R>
   bound() { return bound; }
+
+  public <U extends X, V> BiFunction<U, V, R>
+  applyFirst() { return ((u, v) -> bound.apply(u)); }
+
+  public <U, V extends X> BiFunction<U, V, R>
+  applySecond() { return ((u, v) -> bound.apply(v)); }
 
   @Override
   public <U> JavaFunctionBinder<U, R>

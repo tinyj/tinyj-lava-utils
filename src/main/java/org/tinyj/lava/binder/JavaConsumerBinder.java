@@ -1,21 +1,18 @@
 package org.tinyj.lava.binder;
 
-import org.tinyj.lava.JavaFun;
+import org.tinyj.lava.utils.JavaFun;
 
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * Enable various forms of currying on Java's (#Consumer).
- *
+ * Enable various forms of currying on Java's {@link Consumer}.
+ * <p>
  * To enable a fluent syntax binders wrapping the curried function are returned
  * where applicable. This introduces some overhead that might be an issue if
  * either the result is invoked many times or many results are produced. Use
- * `bound()` unwrap these results.
+ * {@code bound()} to unwrap results.
  *
  * @param <X> the type of the argument to the operation
  */
@@ -30,15 +27,15 @@ public class JavaConsumerBinder<X>
   }
 
   /**
-   * Curry argument with `x`.
+   * Curry argument with {@code x}.
    */
   public Runnable
   bind(X x) { return () -> bound.accept(x); }
 
   /**
-   * Link the argument to supplied value. `x` is invoked each time the
-   * resulting (#Runnable) is invoked and the results is supplied as argument
-   * to the curried (#Consumer).
+   * Link the argument to supplied value. {@code x} is invoked each time the
+   * resulting {@link Runnable} is invoked and the results is supplied as argument
+   * to the curried {@link Consumer}.
    */
   public Runnable
   linkTo(Supplier<? extends X> x) {
@@ -47,8 +44,8 @@ public class JavaConsumerBinder<X>
   }
 
   /**
-   * Map the argument. `x` is invoked each time the resulting (#Consumer) is
-   * invoked and the result is supplied as argument to the curried (#Consumer).
+   * Map the argument. {@code x} is invoked each time the resulting {@link Consumer} is
+   * invoked and the result is supplied as argument to the curried {@link Consumer}.
    */
   public <U> JavaConsumerBinder<U>
   linkTo(Function<? super U, ? extends X> x) {
@@ -57,8 +54,8 @@ public class JavaConsumerBinder<X>
   }
 
   /**
-   * Map the argument. `x` is invoked each time the resulting (#BiConsumer) is
-   * invoked and the result is supplied as argument to the curried (#Consumer).
+   * Map the argument. {@code x} is invoked each time the resulting {@link BiConsumer} is
+   * invoked and the result is supplied as argument to the curried {@link Consumer}.
    */
   public <U, V> JavaBiConsumerBinder<U, V>
   linkTo(BiFunction<? super U, ? super V, ? extends X> x) {
@@ -67,10 +64,16 @@ public class JavaConsumerBinder<X>
   }
 
   /**
-   * @return the wrapped (#Consumer)
+   * @return the wrapped {@link Consumer}
    */
   public Consumer<X>
   bound() { return bound; }
+
+  public <U extends X, V> BiConsumer<U, V>
+  acceptFirst() { return ((u, v) -> bound.accept(u)); }
+
+  public <U, V extends X> BiConsumer<U, V>
+  acceptSecond() { return ((u, v) -> bound.accept(v)); }
 
   @Override
   public Consumer<X> andThen(Consumer<? super X> after) { return new JavaConsumerBinder<>(bound.andThen(after)); }

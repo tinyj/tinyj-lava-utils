@@ -7,12 +7,12 @@ import org.tinyj.lava.LavaSupplier;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Enable various forms of currying on (#LavaBiFunction).
- *
+ * Enable various forms of currying on {@link LavaBiFunction}.
+ * <p>
  * To enable a fluent syntax binders wrapping the curried function are returned
  * where applicable. This introduces some overhead that might be an issue if
  * either the result is invoked many times or many results are produced. Use
- * `bound()` unwrap these results.
+ * {@code bound()} unwrap these results.
  *
  * @param <X> the type of the first argument to the function
  * @param <Y> the type of the second argument to the function
@@ -53,9 +53,9 @@ public class LavaBiFunctionBinder<X, Y, R, E extends Exception>
   bindSecond(Y y) { return new LavaFunctionBinder<>(x -> bound.checkedApply(x, y)); }
 
   /**
-   * Link both arguments to supplied values. `x` and `y` are invoked each
-   * time the resulting (#LavaSupplier) is invoked and the results are supplied as
-   * arguments to the bound (#LavaBiFunction).
+   * Link both arguments to supplied values. {@code x} and {@code y} are invoked each
+   * time the resulting {@link LavaSupplier} is invoked and the results are supplied as
+   * arguments to the bound {@link LavaBiFunction}.
    */
   public LavaSupplier<R, ?>
   link(LavaSupplier<? extends X, ?> x, LavaSupplier<? extends Y, ?> y) {
@@ -65,9 +65,9 @@ public class LavaBiFunctionBinder<X, Y, R, E extends Exception>
   }
 
   /**
-   * Map both arguments. `x` and `y` are invoked each time the resulting
-   * (#LavaBiFunction) is invoked and the results are supplied as arguments to the
-   * bound (#LavaBiFunction).
+   * Map both arguments. {@code x} and {@code y} are invoked each time the resulting
+   * {@link LavaBiFunction} is invoked and the results are supplied as arguments to the
+   * bound {@link LavaBiFunction}.
    */
   public <U, V> LavaBiFunctionBinder<U, V, R, ?>
   link(LavaFunction<? super U, ? extends X, ?> x, LavaFunction<? super V, ? extends Y, ?> y) {
@@ -77,9 +77,9 @@ public class LavaBiFunctionBinder<X, Y, R, E extends Exception>
   }
 
   /**
-   * Link the first argument to supplied value. `x` is invoked each time the
-   * resulting (#LavaFunction) is invoked and the results is supplied as first
-   * argument to the bound (#LavaBiFunction).
+   * Link the first argument to supplied value. {@code x} is invoked each time the
+   * resulting {@link LavaFunction} is invoked and the results is supplied as first
+   * argument to the bound {@link LavaBiFunction}.
    */
   public LavaFunctionBinder<Y, R, ?>
   linkFirst(LavaSupplier<? extends X, ?> x) {
@@ -88,9 +88,9 @@ public class LavaBiFunctionBinder<X, Y, R, E extends Exception>
   }
 
   /**
-   * Map the first argument. `x` is invoked each time the resulting
-   * (#LavaBiFunction) is invoked and the result is supplied as first argument
-   * to the bound (#LavaBiFunction).
+   * Map the first argument. {@code x} is invoked each time the resulting
+   * {@link LavaBiFunction} is invoked and the result is supplied as first argument
+   * to the bound {@link LavaBiFunction}.
    */
   public <U> LavaBiFunctionBinder<U, Y, R, ?>
   linkFirst(LavaFunction<? super U, ? extends X, ?> x) {
@@ -99,9 +99,9 @@ public class LavaBiFunctionBinder<X, Y, R, E extends Exception>
   }
 
   /**
-   * Link the second argument to supplied value. `y` is invoked each time the
-   * resulting (#LavaFunction) is invoked and the results is supplied as second
-   * argument to the bound (#LavaBiFunction).
+   * Link the second argument to supplied value. {@code y} is invoked each time the
+   * resulting {@link LavaFunction} is invoked and the results is supplied as second
+   * argument to the bound {@link LavaBiFunction}.
    */
   public LavaFunctionBinder<X, R, ?>
   linkSecond(LavaSupplier<? extends Y, ?> y) {
@@ -110,9 +110,9 @@ public class LavaBiFunctionBinder<X, Y, R, E extends Exception>
   }
 
   /**
-   * Map the second argument. `y` is invoked each time the resulting
-   * (#LavaBiFunction) is invoked and the result is supplied as second argument
-   * to the bound (#LavaBiFunction).
+   * Map the second argument. {@code y} is invoked each time the resulting
+   * {@link LavaBiFunction} is invoked and the result is supplied as second argument
+   * to the bound {@link LavaBiFunction}.
    */
   public <V> LavaBiFunctionBinder<X, V, R, ?>
   linkSecond(LavaFunction<? super V, ? extends Y, ?> y) {
@@ -121,7 +121,7 @@ public class LavaBiFunctionBinder<X, Y, R, E extends Exception>
   }
 
   /**
-   * @return the wrapped (#LavaBiFunction)
+   * @return the wrapped {@link LavaBiFunction}
    */
   public LavaBiFunction<X, Y, R, E>
   bound() { return bound; }

@@ -1,20 +1,21 @@
 package org.tinyj.lava.binder;
 
-import org.tinyj.lava.JavaFun;
+import org.tinyj.lava.utils.JavaFun;
 
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * Enable various forms of currying on Java's (#BiConsumer).
- *
+ * Enable various forms of currying on Java's {@link BiConsumer}.
+ * <p>
  * To enable a fluent syntax binders wrapping the curried function are returned
  * where applicable. This introduces some overhead that might be an issue if
  * either the result is invoked many times or many results are produced. Use
- * `bound()` unwrap these results.
+ * {@code bound()} to unwrap results.
  *
  * @param <X> the type of the first argument to the operation
  * @param <Y> the type of the second argument to the operation
@@ -54,9 +55,9 @@ public class JavaBiConsumerBinder<X, Y>
   bindSecond(Y y) { return new JavaConsumerBinder<>(x -> bound.accept(x, y)); }
 
   /**
-   * Link both arguments to supplied values. `x` and `y` are invoked each
-   * time the resulting (#Runnable) is invoked and the results are supplied as
-   * arguments to the bound (#BiConsumer).
+   * Link both arguments to supplied values. {@code x} and {@code y} are invoked each
+   * time the resulting {@link Runnable} is invoked and the results are supplied as
+   * arguments to the bound {@link BiConsumer}.
    */
   public Runnable
   link(Supplier<? extends X> x, Supplier<? extends Y> y) {
@@ -66,9 +67,9 @@ public class JavaBiConsumerBinder<X, Y>
   }
 
   /**
-   * Map both arguments. `x` and `y` are invoked each time the resulting
-   * (#BiConsumer) is invoked and the results are supplied as arguments to the
-   * bound (#BiConsumer).
+   * Map both arguments. {@code x} and {@code y} are invoked each time the resulting
+   * {@link BiConsumer} is invoked and the results are supplied as arguments to the
+   * bound {@link BiConsumer}.
    */
   public <U, V> JavaBiConsumerBinder<U, V>
   link(Function<? super U, ? extends X> x, Function<? super V, ? extends Y> y) {
@@ -78,9 +79,9 @@ public class JavaBiConsumerBinder<X, Y>
   }
 
   /**
-   * Link the first argument to supplied value. `x` is invoked each time the
-   * resulting (#Consumer) is invoked and the results is supplied as first
-   * argument to the bound (#BiConsumer).
+   * Link the first argument to supplied value. {@code x} is invoked each time the
+   * resulting {@link Consumer} is invoked and the results is supplied as first
+   * argument to the bound {@link BiConsumer}.
    */
   public JavaConsumerBinder<Y>
   linkFirst(Supplier<? extends X> x) {
@@ -89,9 +90,9 @@ public class JavaBiConsumerBinder<X, Y>
   }
 
   /**
-   * Map the first argument. `x` is invoked each time the resulting
-   * (#BiConsumer) is invoked and the result is supplied as first argument
-   * to the bound (#BiConsumer).
+   * Map the first argument. {@code x} is invoked each time the resulting
+   * {@link BiConsumer} is invoked and the result is supplied as first argument
+   * to the bound {@link BiConsumer}.
    */
   public <U> JavaBiConsumerBinder<U, Y>
   linkFirst(Function<? super U, ? extends X> x) {
@@ -100,9 +101,9 @@ public class JavaBiConsumerBinder<X, Y>
   }
 
   /**
-   * Link the second argument to supplied value. `y` is invoked each time the
-   * resulting (#Consumer) is invoked and the results is supplied as second
-   * argument to the bound (#BiConsumer).
+   * Link the second argument to supplied value. {@code y} is invoked each time the
+   * resulting {@link Consumer} is invoked and the results is supplied as second
+   * argument to the bound {@link BiConsumer}.
    */
   public JavaConsumerBinder<X>
   linkSecond(Supplier<? extends Y> y) {
@@ -111,9 +112,9 @@ public class JavaBiConsumerBinder<X, Y>
   }
 
   /**
-   * Map the second argument. `y` is invoked each time the resulting
-   * (#BiConsumer) is invoked and the result is supplied as second argument
-   * to the bound (#BiConsumer).
+   * Map the second argument. {@code y} is invoked each time the resulting
+   * {@link BiConsumer} is invoked and the result is supplied as second argument
+   * to the bound {@link BiConsumer}.
    */
   public <V> JavaBiConsumerBinder<X, V>
   linkSecond(Function<? super V, ? extends Y> y) {
@@ -122,7 +123,7 @@ public class JavaBiConsumerBinder<X, Y>
   }
 
   /**
-   * @return the wrapped (#BiConsumer)
+   * @return the wrapped {@link BiConsumer}
    */
   public BiConsumer<X, Y>
   bound() { return bound; }
