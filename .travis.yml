@@ -1,6 +1,6 @@
 laguage: java
 jdk: oraclejdk9
-install: mvn skipTests package
+install: mvn -D skipTests package
 script: mvn verify
 deploy:
   provider: script
