@@ -1,8 +1,8 @@
 laguage: java
 jdk: oraclejdk9
-install: mvn -D skipTests package
-script: mvn verify
+install: mvn -s travis-mvn-settings.xml -D skipTests package
+script: mvn -s travis-mvn-settings.xml verify
 deploy:
   provider: script
-  script: mvn --settings travis-mvn-settings.xml -P sonatype clean deploy
+  script: mvn -s travis-mvn-settings.xml clean deploy
   on: {branch: master}
