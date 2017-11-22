@@ -9,4 +9,37 @@
       <password>${OSSRH_PASSWORD}</password>
     </server>
   </servers>
+
+  <activeProfiles>
+    <activeProfile>sonatype</activeProfile>
+  </activeProfiles>
+  <profiles>
+    <profile>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>oss.sonatype.com-snapshots</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>apache.snapshots</id>
+          <name>Maven Plugin Snapshots</name>
+          <url>http://repository.apache.org/snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
 </settings>
