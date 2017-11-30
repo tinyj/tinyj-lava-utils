@@ -6,12 +6,33 @@
   <artifactId>lava-utils</artifactId>
   <version>0-SNAPSHOT</version>
 
+  <name>TinyJ Lava-Utils</name>
+  <description>
+    A bunch of static methods and classes simplifying functional programmingin Java.
+  </description>
+  <url>https://github.com/tinyj/tinyj-lava-api</url>
+  <scm>
+    <url>https://github.com/tinyj/tinyj-lava-api</url>
+  </scm>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Eric Karge</name>
+      <email>e.karge@struction.de</email>
+    </developer>
+  </developers>
+
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>9</maven.compiler.release>
     <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
     <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
-    <BUILD_DIR>${project.basedir}/target</BUILD_DIR>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <build>
