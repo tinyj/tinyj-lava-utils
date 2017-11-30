@@ -10,9 +10,9 @@
   <description>
     A bunch of static methods and classes simplifying functional programmingin Java.
   </description>
-  <url>https://github.com/tinyj/tinyj-lava-api</url>
+  <url>https://github.com/tinyj/tinyj-lava-utils</url>
   <scm>
-    <url>https://github.com/tinyj/tinyj-lava-api</url>
+    <url>https://github.com/tinyj/tinyj-lava-utils</url>
   </scm>
   <licenses>
     <license>
